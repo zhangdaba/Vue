@@ -1,0 +1,28 @@
+1.刪除全局webpack npm uninstall webpack -g
+2.刪除本地；npm un webpack
+3.安裝全局：npm install webpack -g
+4.安裝指定：npm install --save-dev webpack@3.6.0 -g
+
+
+
+
+webpack基本使用（具体可以参考md5）
+1.首先要初始化文件，  npm init -y(生成package.json)
+2.在根目录建立一个src文件夹，存放（index.html、main.js）
+3.在根目录建立一个dist文件夹存放webpack生成的bud.js文件 
+4.验证是否可以正常打包（webpack ./src/main.js ./dist/bud.js）
+5.安装webpack-dev-server(cnom i webpack-dev-server -D)中间会提示你要装一些依赖的插件，
+    他可以帮我们实现无刷新，热部署
+6.在webpack.config.js配置 相關的数据
+7.安裝`html-webpack-plugin，插件实现页面托管
+8.如果想要引入css文件、less文件、sass文件。。。，可以通过引入插件解决参考 md5
+9.默认情况下webpack无法处理样式表中文件地址或者字体库或者图片，
+cnpm i url-loader  file-loader -D
+
+
+解决npm install babel-loader@8.0.5      设置版本冲突问题
+
+
+npm i module_name  -S  = >  npm install module_name --save    写入到 dependencies 对象
+npm i module_name  -D  => npm install module_name --save-dev   写入到 devDependencies 对象
+devDependencies  里面的插件只用于开发环境，不用于生产环境，而 dependencies  是需要发布到生产环境的。
