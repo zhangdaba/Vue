@@ -46,7 +46,8 @@ export default {
         methods:{
                 //轮播图获取数据的方法
                 getlist(){
-                        this.$http.get("http://vue.studyit.io/api/getlunbo").then(function(data){
+                    //地址在main.js里面设置了全局的地址
+                        this.$http.get("api/getlunbo").then(function(data){
                                 console.log(data.body);
                                 if(data.body==0){
                                         this.lunbo=data.body.message;
