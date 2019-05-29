@@ -2,8 +2,8 @@
     <div class="container">
         <h3>我是评论组件</h3>
         <hr>
-        <textarea name="" id="" cols="30" rows="10" placeholder="请输入内容，最毒输入120字"></textarea>
-        <mt-button type="primary" size="large">发表评论</mt-button>
+        <textarea name="" id="" cols="30" rows="10" placeholder="请输入内容，最毒输入120字" v-model="msg"></textarea>
+        <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
         <div class="cmt-list">
             <div class="cmt-item" v-for="(item,i) in list" :key="item.pubDate">
                 <div class="cmt-title">
@@ -25,8 +25,9 @@ import {Toast} from 'mint-ui'
 export default {
         data:function(){
             return{
-                page:1,
-                list:[]
+                page:1,//默认展示第一页数据
+                list:[],//所有评论数据
+                msg:""//评论输入的内容
             }
         },
         created(){
@@ -48,6 +49,30 @@ export default {
             getMore(){
                 this.page++;
                 this.getcomment();
+            },
+            // 发表评论
+                // 参数1： 请求的URL地址
+                // 参数2： 提交给服务器的数据对象 { content: this.msg }
+                // 参数3： 定义提交时候，表单中数据的格式  { emulateJSON:true }
+            postComment(){
+                //校验文本域的内容是否为空
+                if(this.msg.trim().length==0){
+                   return     Toast('评论内容不能为空')
+                }
+                    this.$http.post("地址",this.$route.params.id,{ content:this.msg.trim()})
+                    .then(function(data){
+                            if(data.body.status==0){
+                                    //拼接一个评论对象
+                                    var cmt={
+                                        user_name:'匿名用户',
+                                        add_time:Date.now(),
+                                        comtent:this.msg.trim()
+                                        }
+                                    this.list.unshift(cmt);
+                                    this.msg="";    
+                            }
+
+                    });
             }
         },
         props:["id"]
