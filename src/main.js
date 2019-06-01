@@ -51,7 +51,8 @@ Vue.http.options.emulateJSON = true;
 var vm=new Vue({
     el:"#dv",
     data:{},
-    menthods:{},
+    menthods:{
+    },
     //webpack中的vue中组件只能用render
     // render:function(c){
     //      return c(app);
@@ -59,4 +60,5 @@ var vm=new Vue({
     render:c =>c(app),
     //挂载路由对象到vue对象上
     router:router
+
 });

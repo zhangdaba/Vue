@@ -29,7 +29,7 @@
    </div>
 </template>
 <script>
-     
+     console.log(this);
 </script>
 <style scoped>
     .app-container{
